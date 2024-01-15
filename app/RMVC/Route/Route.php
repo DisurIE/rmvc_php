@@ -6,8 +6,34 @@ class Route
 {
 
     private static array $routesGet = [];
-    public static function get()
+    private static array $routesPost = [];
+
+    public static function getRoutesPost(): array
     {
-        echo "this is get";
+        return self::$routesPost;
+    }
+    public static function get(string $route, array $controller) : RouteConfiguration
+    {
+        $routeConfiguration = new RouteConfiguration($route, $controller[0], $controller[1]);
+        self::$routesGet[] = $routeConfiguration;
+        //var_dump($routeConfiguration);
+        return $routeConfiguration;
+    }
+    public static function post(string $route, array $controller) : RouteConfiguration
+    {
+        $routeConfiguration = new RouteConfiguration($route, $controller[0], $controller[1]);
+        self::$routesPost[] = $routeConfiguration;
+        //var_dump($routeConfiguration);
+        return $routeConfiguration;
+    }
+
+    public static function getRoutesGet(): array
+    {
+        return self::$routesGet;
+    }
+
+    public static function redirect($url)
+    {
+        Header('Location: ' . $url);
     }
 }

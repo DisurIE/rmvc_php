@@ -1,5 +1,8 @@
 <?php
 
 use App\RMVC\Route\Route;
+use App\Http\Controllers\PostController;
 
-Route::get();
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store')->middleware('auth');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')->middleware('auth');
